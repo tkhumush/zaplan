@@ -1,4 +1,4 @@
-var pubKey = "npub1je7qk0kvcck30r2g7f8znjdqchsz983dgrahw0fgt749v6ec5yzq0fjf2a";
+var pubKey = "";
 var signedEvent = "";
 
 var localData = {
