@@ -13,6 +13,10 @@ body, input, button {
   fill: none;
 }
 
+.profile {
+  padding-bottom: 20px;
+}
+
 header {
   width: 100%;
   height: 120px;
@@ -69,7 +73,7 @@ header input:-ms-input-placeholder {
   height: 50px;
 
   position:absolute;
-  top:53px;
+  top:35px;
   right:15px;
   z-index:2;
 
