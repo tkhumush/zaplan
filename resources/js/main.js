@@ -170,13 +170,5 @@ async function prepareEvent() {
 };
 
 
-document.querySelector('.js-nostr-login-button')
-  .addEventListener('click', () => {
-    login();
-  });
 
-async function login() {
-  pubKey = await window.nostr.getPublicKey();
-  document.querySelector('.js-profile-element').innerHTML = `Your pubKey: ${pubKey}`;
-  renderTodoList();
-};
+
