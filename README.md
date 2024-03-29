@@ -11,7 +11,7 @@ This app helps users track a simple todo list within two categories:
 The todo list is encrypted similar to how DMs are encrypted using NIP-07
 
 # Event Kind
-Currently the app is using events Kind 4, thats why I highlight discourage using your main nostr keys to test the app. Unless you want to send JSON files as DMs to your self.
+Currently the app is using events Kind 48636, thats why I highlight discourage using your main nostr keys to test the app. Unless you want to send JSON files as DMs to your self.
 
 A new Kind will eventually needs to be created to accommodate for todo lists.
 
