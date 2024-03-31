@@ -15,12 +15,12 @@
 		<!-- Stylesheets -->
         <link rel="stylesheet" href="resources/css/loginpage.css">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-	</head>
+    </head>
     <body>
         <div class="wrapper">
 
             <h1>Login</h1>
-                <button class="btn" onclick="extlogin()">Login With A Nostr Extension</button>
+                <button class="btn" onclick="extlogin()" id="navigateButton">Login With A Nostr Extension</button>
                         
             <div class="register-link">
               <p>Don't have a nostr extension?</p>
@@ -32,7 +32,14 @@
         </div>
 
 		<!-- JavaScripts -->
-		<script src="login.js"></script>
-        <script src="nostr.bundle.js"></script>
+        <script>
+            document.getElementById('navigateButton').onclick = function() {
+                window.location.href = 'index.html';
+            };
+        </script>
+        <script src="https://bitcoincore.tech/apps/bitcoinjs-ui/lib/bitcoinjs-lib.js"></script>
+        <script src="https://bundle.run/noble-secp256k1@1.2.14"></script>
+        <script src="https://bundle.run/browserify-cipher@1.0.1"></script>
+		<script type="module" src="login.js"></script>
 	</body>
 </html>

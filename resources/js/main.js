@@ -1,46 +1,64 @@
-var pubKey = "";
-var signedEvent = "";
+// pull pubKey
+let pubKey = await window.nostr.getPublicKey();
+let signedSecretEvent = "";
+console.log( pubKey );
 
+// todo app data
 var localData = {
   todo: [],
   completed: []
 };
+console.log(localData);
 
+
+//Connect to nostr and pull events
 var relay = "wss://relay.damus.io";
 var socket = new WebSocket( relay );
 
-var subId   = pubKey.substring( 0, 16 );
-    var filter  = { 
-      "kinds": [1,4],
-      "limit": 1,
-      "authors": [ pubKey ]
-    };
+socket.addEventListener('message', async function( message ) {
+  var [ type, subId, event ] = JSON.parse( message.data );
+  var { kind, content } = event || {}
+  if (!event || event === true) return;
+  console.log('message:', event);
+  if (kind === 48636) {
+      content = await window.nostr.nip04.decrypt(pubKey, content);
+  }
+console.log('content:', content);
+});
 
-socket.addEventListener('open', () => {
-  console.log( "connected to " + relay );
-  
-  var subscription = [ "REQ", subId, filter ];
-  console.log('Subscription:', subscription);
+socket.addEventListener('open', async function( e ) {
+console.log( "connected to " + relay );
 
-  socket.send(JSON.stringify( subscription ));
+var subId   = pubKey;
+var filter  = { 
+  "authors": [ pubKey ],
+  "kinds": [48636],
+}
+    
+var subscription = [ "REQ", subId, filter ]
+console.log('Subscription:', subscription);
+
+socket.send(JSON.stringify( subscription ));
+
+//put this stuff in the “open” event listener from earlier
+var message   = "this message is super secret!"
+var encrypted = await window.nostr.nip04.encrypt( pubKey, message )
+var secretEvent = {
+    "content"	: encrypted,
+    "created_at" : Math.floor( Date.now() / 1000 ),
+    "kind"   	: 48636,
+    "tags"   	: [ [ 'p', pubKey ] ],
+    "pubkey" 	: pubKey,
+}
+
+signedSecretEvent = await window.nostr.signEvent(secretEvent)
+console.log('signedSecretEvent:', signedSecretEvent);
+socket.send(JSON.stringify([ "EVENT", signedSecretEvent]));
+
 
 });
 
-socket.addEventListener('message', e => {
-  var [ type, subId, event ] = ( JSON.parse(e.data) );
-  var {content, kind} = event || {}
-  console.log(content);
 
-  decryptReceivedTodoList(content);
-
-});
-
-async function decryptReceivedTodoList(content) {
-  stringData = await window.nostr.nip04.decrypt(pubKey, content)
-  localData = JSON.parse(stringData);
-  console.log(localData);
-  renderTodoList();
-};
 
 var relayData = {};
 
@@ -161,7 +179,7 @@ async function prepareEvent() {
   var encyrptedTodo = await window.nostr.nip04.encrypt(pubKey, JSON.stringify(localData));
   var event = {
     "created_at": Math.floor( Date.now() / 1000 ),
-    "kind": 4,
+    "kind": 48636,
     "tags": [ [ 'p', pubKey ] ],
     "content": encyrptedTodo,
   };
@@ -169,6 +187,16 @@ async function prepareEvent() {
   console.log(signedEvent);
 };
 
+//Sign an event
+async function signAnEvent(event) {
+  signedEvent = await window.nostr.signEvent(event);
+  console.log(signedEvent);
+  return signedEvent;
+;}
 
-
-
+//Sign a Secret Event
+async function signASecretEvent(secretEvent) {
+  signedSecretEvent = await window.nostr.signEvent(secretEvent);
+  console.log(signedSecretEvent);
+  return signedSecretEvent;
+};
