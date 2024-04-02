@@ -2,9 +2,8 @@
 let pubKey = await window.nostr.getPublicKey();
 let signedSecretEvent = "";
 console.log( pubKey );
-
-let profile = document.getElementById("profile")
-profile.innerText = pubKey;
+let profile = "";
+let profilePicture = "";
 
 
 // todo app data
@@ -28,14 +27,23 @@ socket.addEventListener('message', async function( message ) {
   var [ type, subId, event ] = JSON.parse( message.data );
   var { kind, content } = event || {}
   if (!event || event === true) return;
-  console.log('message:', event);
+    console.log('message:', event);
+  if (kind === 0) {
+    profile = JSON.parse(content);
+    console.log(profile)
+    profilePicture = profile.picture;
+    console.log(profilePicture);
+    var img = document.getElementById('pPicture')
+    img.src = profilePicture;
+  }
   if (kind === 48636) {
       content = await window.nostr.nip04.decrypt(pubKey, content);
+      console.log('content:', JSON.parse(content));
+      localData = JSON.parse(content);
+      console.log(localData);
+      clearLists()
+      renderTodoList();
   }
-console.log('content:', JSON.parse(content));
-localData = JSON.parse(content);
-console.log(localData);
-renderTodoList();
 });
 
 socket.addEventListener('open', async function( e ) {
@@ -45,7 +53,7 @@ console.log( "connected to " + relay );
 var subId   = pubKey;
 var filter  = { 
   "authors" : [ pubKey ],
-  "kinds"   : [48636],
+  "kinds"   : [0, 48636],
   "limit"   : 1,
 } 
 var subscription = [ "REQ", subId, filter ]
@@ -197,4 +205,13 @@ async function signASecretEvent(secretEvent) {
   signedSecretEvent = await window.nostr.signEvent(secretEvent);
   console.log(signedSecretEvent);
   return signedSecretEvent;
+};
+
+function clearLists() {
+  var todoList = document.getElementById('todo');
+
+  var completedList = document.getElementById('completed');
+
+  todoList.innerHTML  = '';
+  completedList.innerHTML = '';
 };

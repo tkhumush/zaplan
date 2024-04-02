@@ -13,13 +13,17 @@ body, input, button {
   fill: none;
 }
 
-.profile {
-  padding-bottom: 20px;
+.js-profile-element {
+  position: absolute;
+  left: 22px;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
 }
 
 header {
   width: 100%;
-  height: 120px;
+  height: 80px;
 
   position: fixed;
   padding: 15px;
@@ -34,9 +38,10 @@ header {
 }
 
 header input {
-  width: 100%;
+  position: absolute;
+  width: 93%;
   height: 50px;
-  float: left;
+  left: 80px;
   color: #fff;
   font-size: 15px;
   font-weight: 400;
@@ -73,7 +78,7 @@ header input:-ms-input-placeholder {
   height: 50px;
 
   position:absolute;
-  top:35px;
+  top:15px;
   right:15px;
   z-index:2;
 
