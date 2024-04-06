@@ -3,7 +3,7 @@ let pubKey = await window.nostr.getPublicKey();
 let signedSecretEvent = "";
 console.log( pubKey );
 let profile = "";
-let profilePicture = "";
+let profilePicture = "../css/zaplan_logo.png";
 
 
 // todo app data

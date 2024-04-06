@@ -16,9 +16,9 @@ body, input, button {
 .js-profile-element {
   position: absolute;
   left: 22px;
-  height: 45px;
-  width: 45px;
-  border-radius: 50%;
+  top: 7px;
+  height: 60.8px;
+  width: 47.1px;
 }
 
 header {
@@ -39,7 +39,7 @@ header {
 
 header input {
   position: absolute;
-  width: 90%;
+  width: 92%;
   height: 50px;
   left: 80px;
   color: #fff;
