@@ -27,12 +27,12 @@ socket.addEventListener('message', async function( message ) {
   if (!event || event === true) return;
     console.log('message:', event);
   if (kind === 0) {
-    profile = JSON.parse(content);
-    console.log(profile)
-    profilePicture = profile.picture;
-    console.log(profilePicture);
-    var img = document.getElementById('pPicture')
-    img.src = profilePicture;
+    //profile = JSON.parse(content);
+    //console.log(profile)
+    //profilePicture = profile.picture;
+    //console.log(profilePicture);
+    //var img = document.getElementById('pPicture')
+    //img.src = profilePicture;
   }
   if (kind === 48636) {
       content = await window.nostr.nip04.decrypt(pubKey, content);
