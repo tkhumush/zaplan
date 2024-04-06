@@ -2,8 +2,8 @@
 ## Proof of concept versions (Alpha)
 
 Version 0.5
+- [ ] Allow for other nostr extensions to work. currently only Alby is supported.
 - [ ] Pull profile data from kind 0 and update profile picture: This requires better event handling (retreiving more than 1 event, sorting events by date, and using the latest info for both profile and todo list json.
-- [ ] Test that nostr extension works with all extensions. Currently working with Alby, for some reason, I am unable to use other extension apps.
 - [ ] Update checkbox icon to use app logo
 - [ ] Better relay selection or keep for hard coded for now?
 
