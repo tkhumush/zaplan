@@ -1,11 +1,8 @@
 // pull pubKey
-
-document.addEventListener('DOMContentLoaded', function() {
-    let pubKey = await window.nostr.getPublicKey();
-    let signedSecretEvent = "";
-    console.log( pubKey );
-    let profile = "";
-});
+let pubKey = await window.nostr.getPublicKey();
+let signedSecretEvent = "";
+console.log( pubKey );
+let profile = "";
 
 
 // todo app data
