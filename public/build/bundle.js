@@ -1363,7 +1363,7 @@ function create_if_block_1(ctx) {
 	return block;
 }
 
-// (1:0) <script>     import { getContext, onDestroy }
+// (1:0) <script>      import { getContext, onDestroy }
 function create_catch_block(ctx) {
 	const block = {
 		c: noop,
@@ -1378,14 +1378,14 @@ function create_catch_block(ctx) {
 		block,
 		id: create_catch_block.name,
 		type: "catch",
-		source: "(1:0) <script>     import { getContext, onDestroy }",
+		source: "(1:0) <script>      import { getContext, onDestroy }",
 		ctx
 	});
 
 	return block;
 }
 
-// (44:49)              <svelte:component                 this={resolvedComponent?.default || resolvedComponent}
+// (44:49)               <svelte:component                  this={resolvedComponent?.default || resolvedComponent}
 function create_then_block(ctx) {
 	let switch_instance;
 	let switch_instance_anchor;
@@ -1471,14 +1471,14 @@ function create_then_block(ctx) {
 		block,
 		id: create_then_block.name,
 		type: "then",
-		source: "(44:49)              <svelte:component                 this={resolvedComponent?.default || resolvedComponent}",
+		source: "(44:49)               <svelte:component                  this={resolvedComponent?.default || resolvedComponent}",
 		ctx
 	});
 
 	return block;
 }
 
-// (1:0) <script>     import { getContext, onDestroy }
+// (1:0) <script>      import { getContext, onDestroy }
 function create_pending_block(ctx) {
 	const block = {
 		c: noop,
@@ -1493,7 +1493,7 @@ function create_pending_block(ctx) {
 		block,
 		id: create_pending_block.name,
 		type: "pending",
-		source: "(1:0) <script>     import { getContext, onDestroy }",
+		source: "(1:0) <script>      import { getContext, onDestroy }",
 		ctx
 	});
 
@@ -2040,7 +2040,7 @@ function create_key_block(ctx) {
 		c: function create() {
 			div = element("div");
 			if (default_slot) default_slot.c();
-			add_location(div, file$3, 135, 8, 4659);
+			add_location(div, file$3, 135, 8, 4794);
 		},
 		m: function mount(target, anchor) {
 			insert_dev(target, div, anchor);
@@ -2755,7 +2755,7 @@ function create_default_slot(ctx) {
 			create_component(route0.$$.fragment);
 			t = space();
 			create_component(route1.$$.fragment);
-			add_location(main, file$1, 12, 2, 278);
+			add_location(main, file$1, 12, 2, 290);
 		},
 		m: function mount(target, anchor) {
 			insert_dev(target, main, anchor);
@@ -24443,25 +24443,25 @@ function create_fragment(ctx) {
 			a2 = element("a");
 			a2.textContent = "Nostore__";
 			attr_dev(button, "class", "btn");
-			add_location(button, file, 58, 4, 1576);
+			add_location(button, file, 62, 4, 1962);
 			attr_dev(div0, "class", "wrapper");
-			add_location(div0, file, 57, 0, 1550);
-			add_location(p0, file, 63, 8, 1724);
-			add_location(p1, file, 64, 8, 1769);
+			add_location(div0, file, 61, 0, 1935);
+			add_location(p0, file, 67, 8, 2115);
+			add_location(p1, file, 68, 8, 2161);
 			attr_dev(a0, "href", "https://chromewebstore.google.com/detail/ampjiinddmggbhpebhaegmjkbbeofoaj");
-			add_location(a0, file, 67, 24, 1871);
-			add_location(li0, file, 66, 12, 1842);
+			add_location(a0, file, 71, 24, 2266);
+			add_location(li0, file, 70, 12, 2236);
 			attr_dev(a1, "href", "https://addons.mozilla.org/en-US/firefox/addon/nostr-connect/?utm_source=addons.mozilla.org&utm_medium=referral&utm_content=search");
-			add_location(a1, file, 70, 25, 2033);
-			add_location(li1, file, 69, 12, 2003);
+			add_location(a1, file, 74, 25, 2431);
+			add_location(li1, file, 73, 12, 2400);
 			attr_dev(a2, "href", "https://apps.apple.com/us/app/nostore/id1666553677");
-			add_location(a2, file, 73, 30, 2257);
-			add_location(li2, file, 72, 12, 2222);
-			add_location(ul, file, 65, 8, 1825);
+			add_location(a2, file, 77, 30, 2658);
+			add_location(li2, file, 76, 12, 2622);
+			add_location(ul, file, 69, 8, 2218);
 			attr_dev(div1, "class", "register-link");
-			add_location(div1, file, 62, 4, 1688);
+			add_location(div1, file, 66, 4, 2078);
 			attr_dev(div2, "class", "wrapper");
-			add_location(div2, file, 61, 0, 1662);
+			add_location(div2, file, 65, 0, 2051);
 		},
 		l: function claim(nodes) {
 			throw new Error_1("options.hydrate only works if the component was compiled with the `hydratable: true` option");
@@ -24521,6 +24521,7 @@ function instance($$self, $$props, $$invalidate) {
 	let { $$slots: slots = {}, $$scope } = $$props;
 	validate_slots('Login', slots, []);
 	const RELAYS_URL = ['wss://relay.snort.social', 'wss://relay.primal.net', 'wss://relay.damus.io'];
+	const ndk = new NDK(); // Instantiating NDK here
 	let pool;
 	let events = [];
 
@@ -24538,14 +24539,20 @@ function instance($$self, $$props, $$invalidate) {
 				throw new Error('Nostr extension not found. Please install the extension.');
 			}
 
-			const publicKey = await window.nostr.getPublicKey();
+			await ndk.connect(); // Using the previously instantiated NDK
+			const nip07signer = new NDKNip07Signer();
+			const publicKey = await nip07signer.user();
+
+			if (!!publicKey.pubkey) {
+				console.log("Permission granted to read their public key:", publicKey.pubkey);
+			}
 
 			// Create a subscription to listen for events related to the user's profile
 			const subEvents = pool.sub(RELAYS_URL, [
 				{
 					kinds: [0], // Filter events by kind (assuming profile events have kind 0)
 					limit: 1,
-					authors: [publicKey]
+					authors: [publicKey.pubkey]
 				}
 			]);
 
@@ -24576,6 +24583,7 @@ function instance($$self, $$props, $$invalidate) {
 		NDKNip07Signer,
 		navigate,
 		RELAYS_URL,
+		ndk,
 		pool,
 		events,
 		extlogin
