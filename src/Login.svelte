@@ -11,12 +11,13 @@
         'wss://relay.damus.io'
     ];
 
+    const ndk = new NDK(); // Instantiating NDK here
+
     let pool;
     let events = [];
 
     onMount(async () => {
         pool = new SimplePool();
-
 
         return () => {
             pool.unsub();
@@ -28,29 +29,25 @@
             if (!window.nostr) {
                 throw new Error('Nostr extension not found. Please install the extension.');
             }
+            await ndk.connect(); // Using the previously instantiated NDK
 
-
-            // const publicKey = await window.nostr.getPublicKey();
             const nip07signer = new NDKNip07Signer();
-            const ndk = new NDK({ signer: nip07signer });
-            nip07signer.user().then(async (publicKey) => {
-     if (!!publicKey.pubkey) {
-        console.log("Permission granted to read their public key:", publicKey.pubkey);
-    }
-});
+            const publicKey = await nip07signer.user();
+            if (!!publicKey.pubkey) {
+                console.log("Permission granted to read their public key:", publicKey.pubkey);
+            }
 
             // Create a subscription to listen for events related to the user's profile
             const subEvents = pool.sub(RELAYS_URL, [{
                 kinds: [0], // Filter events by kind (assuming profile events have kind 0)
                 limit: 1,
-              //  authors: [publicKey]
+                authors: [publicKey.pubkey]
             }]);
 
             subEvents.on('event', (event) => {
                 events = [...events, event];
                 eventsStore.set(events);
             });
-
 
             // Navigate to the TodoPage component
             navigate('/todoPage');
