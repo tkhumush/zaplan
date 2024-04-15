@@ -30,13 +30,20 @@
             }
 
 
-            const publicKey = await window.nostr.getPublicKey();
+            // const publicKey = await window.nostr.getPublicKey();
+            const nip07signer = new NDKNip07Signer();
+            const ndk = new NDK({ signer: nip07signer });
+            nip07signer.user().then(async (publicKey) => {
+     if (!!publicKey.pubkey) {
+        console.log("Permission granted to read their public key:", publicKey.pubkey);
+    }
+});
 
             // Create a subscription to listen for events related to the user's profile
             const subEvents = pool.sub(RELAYS_URL, [{
                 kinds: [0], // Filter events by kind (assuming profile events have kind 0)
                 limit: 1,
-                authors: [publicKey]
+              //  authors: [publicKey]
             }]);
 
             subEvents.on('event', (event) => {
