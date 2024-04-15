@@ -1,13 +1,13 @@
+// Import Svelte components
 import App from './App.svelte';
-import LoginWithExtension from './Login.svelte';
-import NoExtensionOptions from './Extension.svelte';
+import Login from './Login.svelte';
+import TodoPage from './routes/TodoPage.svelte'
 
+// Create the Svelte app instance
 const app = new App({
     target: document.body,
     props: {
-        LoginWithExtension,
-        NoExtensionOptions
-    }
+        Login,
+        TodoPage
+          }
 });
-
-export default app;

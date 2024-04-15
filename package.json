@@ -1,5 +1,5 @@
 {
-  "name": "svelte-app",
+  "name": "Zaplan",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -7,7 +7,6 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear --dev --host 0.0.0.0 --mime '.js,application/javascript'"
-
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^24.0.0",
@@ -20,6 +19,9 @@
     "svelte": "^3.55.0"
   },
   "dependencies": {
-    "sirv-cli": "^2.0.0"
+    "@nostr-dev-kit/ndk": "^2.7.1",
+    "sirv-cli": "^2.0.0",
+    "svelte-routing": "^2.12.0",
+    "svelte-spa-router": "^4.0.1"
   }
 }

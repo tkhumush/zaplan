@@ -33,7 +33,7 @@ export default {
 	input: 'src/main.js',
 	output: {
 		sourcemap: true,
-		format: 'iife',
+		format: 'es', // Change the output format to 'es' (ECMAScript module)
 		name: 'app',
 		file: 'public/build/bundle.js'
 	},
