@@ -1363,7 +1363,7 @@ function create_if_block_1(ctx) {
 	return block;
 }
 
-// (1:0) <script>      import { getContext, onDestroy }
+// (1:0) <script>     import { getContext, onDestroy }
 function create_catch_block(ctx) {
 	const block = {
 		c: noop,
@@ -1378,14 +1378,14 @@ function create_catch_block(ctx) {
 		block,
 		id: create_catch_block.name,
 		type: "catch",
-		source: "(1:0) <script>      import { getContext, onDestroy }",
+		source: "(1:0) <script>     import { getContext, onDestroy }",
 		ctx
 	});
 
 	return block;
 }
 
-// (44:49)               <svelte:component                  this={resolvedComponent?.default || resolvedComponent}
+// (44:49)              <svelte:component                 this={resolvedComponent?.default || resolvedComponent}
 function create_then_block(ctx) {
 	let switch_instance;
 	let switch_instance_anchor;
@@ -1471,14 +1471,14 @@ function create_then_block(ctx) {
 		block,
 		id: create_then_block.name,
 		type: "then",
-		source: "(44:49)               <svelte:component                  this={resolvedComponent?.default || resolvedComponent}",
+		source: "(44:49)              <svelte:component                 this={resolvedComponent?.default || resolvedComponent}",
 		ctx
 	});
 
 	return block;
 }
 
-// (1:0) <script>      import { getContext, onDestroy }
+// (1:0) <script>     import { getContext, onDestroy }
 function create_pending_block(ctx) {
 	const block = {
 		c: noop,
@@ -1493,7 +1493,7 @@ function create_pending_block(ctx) {
 		block,
 		id: create_pending_block.name,
 		type: "pending",
-		source: "(1:0) <script>      import { getContext, onDestroy }",
+		source: "(1:0) <script>     import { getContext, onDestroy }",
 		ctx
 	});
 
@@ -2040,7 +2040,7 @@ function create_key_block(ctx) {
 		c: function create() {
 			div = element("div");
 			if (default_slot) default_slot.c();
-			add_location(div, file$3, 135, 8, 4794);
+			add_location(div, file$3, 135, 8, 4659);
 		},
 		m: function mount(target, anchor) {
 			insert_dev(target, div, anchor);

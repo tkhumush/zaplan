@@ -14,11 +14,11 @@ body, input, button {
 }
 .js-profile-element {
   position: absolute;
-  left: 22px;
-  top: 7px;
-  width: 70px; /* Adjust width as needed */
+  left: 15px;
+  top: 10px;
+  width: 100%; /* Adjust width as needed */
+  max-width: 60px;
   height: auto;
-  max-height: 100px; /* Adjust max-height as needed */
   object-fit: cover; /* Prevent stretching while maintaining aspect ratio */
   border-radius: 50%; /* Create rounded corners */
 }
@@ -41,14 +41,13 @@ header {
 
 header input {
   position: relative;
-  width: 82%;
+  width: calc(100% - 70px);
   height: 50px;
-  left: 80px;
+  left: 70px;
   color: #fff;
   font-size: 15px;
   font-weight: 400;
   text-indent: 18px;
-  padding: 0 60px 0 0;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 5px 25px 25px 5px;
   border: 0px;
