@@ -1,62 +1,46 @@
 <script>
-    import { onMount } from 'svelte';
-    import { eventsStore } from './utils/eventsStore';
-    import { SimplePool } from 'nostr-tools';
-    import NDK, { NDKNip07Signer } from "@nostr-dev-kit/ndk";
-    import { navigate } from 'svelte-routing';
+  import { onMount } from 'svelte';
+  import { eventsStore } from './utils/eventsStore';
+  import { SimplePool } from 'nostr-tools';
+  import NDK, { NDKNip07Signer } from "@nostr-dev-kit/ndk";
+  import { navigate } from 'svelte-routing';
 
-    const RELAYS_URL = [
-        'wss://relay.snort.social',
-        'wss://relay.primal.net',
-        'wss://relay.damus.io'
-    ];
+  let events = [];
+  const RELAYS_URL = [
+    'wss://relay.snort.social',
+    'wss://relay.primal.net',
+    'wss://relay.damus.io'
+  ];
 
-    const ndk = new NDK(); // Instantiating NDK here
+  const nip07signer = new NDKNip07Signer();
+  let publicKey = {};
 
-    let pool;
-    let events = [];
+  async function extlogin() {
+    try {
+      if (publicKey.pubkey) {
+        console.log("Permission granted to read their public key:", publicKey.pubkey);
+      }
 
-    onMount(async () => {
-        pool = new SimplePool();
+      publicKey = await nip07signer.user();
 
-        return () => {
-            pool.unsub();
-        };
-    });
+      const pool = new SimplePool();
+      const subEvents = pool.sub(RELAYS_URL, [{
+        kinds: [0],
+        authors: [publicKey.pubkey]
+      }]);
 
-    async function extlogin() {
-        try {
-            if (!window.nostr) {
-                throw new Error('Nostr extension not found. Please install the extension.');
-            }
-            await ndk.connect(); // Using the previously instantiated NDK
+      subEvents.on('event', (event) => {
+        events = [...events, event];
+        eventsStore.set(events);
+      });
 
-            const nip07signer = new NDKNip07Signer();
-            const publicKey = await nip07signer.user();
-            if (!!publicKey.pubkey) {
-                console.log("Permission granted to read their public key:", publicKey.pubkey);
-            }
+      navigate('/todoPage');
 
-            // Create a subscription to listen for events related to the user's profile
-            const subEvents = pool.sub(RELAYS_URL, [{
-                kinds: [0], // Filter events by kind (assuming profile events have kind 0)
-                limit: 1,
-                authors: [publicKey.pubkey]
-            }]);
-
-            subEvents.on('event', (event) => {
-                events = [...events, event];
-                eventsStore.set(events);
-            });
-
-            // Navigate to the TodoPage component
-            navigate('/todoPage');
-
-        } catch (error) {
-            console.error('Login failed:', error.message);
-            alert(error.message); // Display the error message to the user
-        }
+    } catch (error) {
+      console.error('Login failed:', error.message);
+      alert(error.message);
     }
+  }
 </script>
 
 <div class="wrapper">
