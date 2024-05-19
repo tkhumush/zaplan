@@ -3,11 +3,11 @@
 
 Zaplan.work Version 0.5
 - [x] Allow for other nostr extensions to work. currently, only Alby is supported
-- [ ] Extend extension support to other browsers (Currently only Firefox is supported)
+- [x] Extend extension support to other browsers (Currently only Firefox is supported)
 - [x] Pull profile data from kind 0 and update profile picture: This requires better event handling (retrieving more than 1 event, sorting events by date, and using the latest info for both profile and todo list JSON
 - [x] Update the checkbox icon to use the app logo
 - [x] We need to create a secondary icon (one for checked and unchecked)
-- [ ] Better relay selection (Currently hard-coded)
+- [x] Better relay selection (Currently hard-coded)
 
 Zaplan.work Version 0.6
 - [ ] Create a second page for public todo list items not only encrypted, but this also means we need to add event verification.
