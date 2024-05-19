@@ -44,10 +44,15 @@
 </script>
 
 <div class="wrapper">
-    <button class="btn" on:click={extlogin}>Login With A Nostr Extension</button>
-</div>
+  <img class="logo" src="./css/zaplan_logo.png">
 
-<div class="wrapper">
+  <p class="title">
+    Welcome to Zaplan! Your Ultimate nostr based To-Do List App!
+  </p>
+  <p class="description">
+    Stay organized and boost your productivity with Zaplan. 
+  </p>
+    <button class="btn" on:click={extlogin}>Login With A Nostr Extension</button>
     <div class="register-link">
         <p>Don't have a nostr extension?</p>
         <p>Check out these nostr extension options:</p>
