@@ -14,13 +14,14 @@ body, input, button {
 }
 .js-profile-element {
   position: absolute;
-  left: 15px;
   top: 10px;
-  width: 100%; /* Adjust width as needed */
-  max-width: 60px;
-  height: auto;
-  object-fit: cover; /* Prevent stretching while maintaining aspect ratio */
-  border-radius: 50%; /* Create rounded corners */
+  left: 15px;
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  border: 2px solid white;
 }
 
 header {
