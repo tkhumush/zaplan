@@ -8,7 +8,8 @@
   const RELAYS_URL = [
     'wss://relay.snort.social',
     'wss://relay.primal.net',
-    'wss://relay.damus.io'
+    'wss://relay.damus.io',
+    'wss://purplepag.es'
   ];
 
   const nip07signer = new NDKNip07Signer();

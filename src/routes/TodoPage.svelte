@@ -10,7 +10,8 @@
  const RELAYS_URL = [
    'wss://relay.snort.social',
    'wss://relay.primal.net',
-   'wss://relay.damus.io'
+   'wss://relay.damus.io',
+   'wss://purplepag.es'
  ];
 
  let profilePicture = '/css/zaplan_logo.png'; // Default fallback image
