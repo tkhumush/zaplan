@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "rollup -c",
+    "build:deploy": "npm run build && rm -rf docs && cp -r public docs",
     "dev": "rollup -c -w",
     "start": "sirv public --no-clear --dev --host 0.0.0.0 --single --mime '.js,application/javascript'"
   },
