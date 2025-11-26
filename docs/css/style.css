@@ -271,3 +271,62 @@ ul.todo#completed:after {
 title {
   font-weight: bold;
 }
+
+/* Status badges for NIP-XX implementation */
+.status-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  margin-left: 8px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-pending .status-badge {
+  background: #e0e0e0;
+  color: #666;
+}
+
+.status-DOING .status-badge {
+  background: #2196F3;
+  color: white;
+}
+
+.status-BLOCKED .status-badge {
+  background: #FF9800;
+  color: white;
+}
+
+.encrypted-badge {
+  font-size: 0.9rem;
+  margin-left: 4px;
+  opacity: 0.7;
+}
+
+/* Update button container width for new status buttons */
+ul.todo li .buttons {
+  width: auto;
+  min-width: 100px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-right: 8px;
+}
+
+ul.todo li .buttons button.status-btn {
+  width: auto;
+  height: auto;
+  padding: 6px 12px;
+  background: #25b99a;
+  color: white;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+ul.todo li .buttons button.status-btn:hover {
+  background: #1fa889;
+  transform: translateY(-2px);
+}
